@@ -12,7 +12,7 @@ pipeline {
             steps { 
                 sh 'mvn package'    
 		            echo "Maven Package Goal Executed Successfully!";
-            }
+            } 
         }
         
         stage('JUnit Reports') {
