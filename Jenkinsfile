@@ -5,7 +5,7 @@ pipeline {
             steps {
                 git url: 'https://github.com/sahilj713/sonarqube-jenkins-pipeline.git'    
 		            echo "Code Checked-out Successfully!!";
-            }
+            } 
         }
         
         stage('Package') {
