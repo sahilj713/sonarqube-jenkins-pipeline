@@ -29,34 +29,51 @@ pipeline {
             }
         }
 
-	stage('SonarQube analysis') {
-            steps {
-		// Change this as per your Jenkins Configuration
-                withSonarQubeEnv('sonar-server') {
-                    sh 'mvn package sonar:sonar'
-                }
-            }
-        }
+	// stage('SonarQube analysis') {
+    //         steps {
+	// 	// Change this as per your Jenkins Configuration
+    //             withSonarQubeEnv('sonar-server') {
+    //                 sh 'mvn package sonar:sonar'
+    //             }
+    //         }
+    //     }
 
-	stage("Quality gate") {
-            steps {
-                waitForQualityGate abortPipeline: true
-            }
-        }
+	// stage("Quality gate") {
+    //         steps {
+    //             waitForQualityGate abortPipeline: true
+    //         }
+    //     }
         
-    }
-    post {
+    // }
+    // post {
         
-        success {
-            echo 'This will run only if successful'
-        }
-        failure {
-            echo 'This will run only if failed'
-        }
+    //     success {
+    //         echo 'This will run only if successful'
+    //     }
+    //     failure {
+    //         echo 'This will run only if failed'
+    //     }
     
-    }
-}
+    // }
 
+stage('Quality Gate Status Check'){
+ steps{
+  script{
+   withSonarQubeEnv('sonar-server'){
+    sh "mvn sonar:sonar"
+   }
+   timeout(time: 1, unit:'HOURS'){
+    def qg = waitForQualityGate()
+      if (qg.status != 'OK'){
+       error "Pipeline aborted due to quality gate failure: ${qg.status}"
+      }
+   }
+   sh "mvn clean install"
+  }
+ }
+}  
+}
+}
 // pipeline {
 //  agent any
 //  //        {
@@ -88,22 +105,6 @@ pipeline {
 //  }
 //  }
 
-// stage('Quality Gate Status Check'){
-//  steps{
-//   script{
-//    withSonarQubeEnv('sonar-server'){
-//     sh "mvn sonar:sonar"
-//    }
-//    timeout(time: 1, unit:'HOURS'){
-//     def qg = waitForQualityGate()
-//       if (qg.status != 'OK'){
-//        error "Pipeline aborted due to quality gate failure: ${qg.status}"
-//       }
-//    }
-//    sh "mvn clean install"
-//   }
-//  }
-// }  
  
 // // Building Docker images
 //  stage('Building image') {
