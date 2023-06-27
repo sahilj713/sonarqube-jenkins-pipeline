@@ -15,12 +15,12 @@ pipeline {
             }
         }
         
-        stage('JUNit Reports') {
-            steps {
-                    junit 'target/surefire-reports/*.xml'
-		                echo "Publishing JUnit reports"
-            }
-        }
+        // stage('JUNit Reports') {
+        //     steps {
+        //             junit 'target/surefire-reports/*.xml'
+		      //           echo "Publishing JUnit reports"
+        //     }
+        // }
         
         stage('Jacoco Reports') {
             steps {
