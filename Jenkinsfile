@@ -58,12 +58,13 @@
 // }
 
 pipeline {
- agent {
-         docker {
-                 image 'maven'
-                 args '-v $HOME/.m2:/root/.m2'
-         }
- }
+ agent any
+ //        {
+ //         docker {
+ //                 image 'maven'
+ //                 args '-v $HOME/.m2:/root/.m2'
+ //         }
+ // }
  environment {
  AWS_ACCOUNT_ID="382904467012"
  AWS_DEFAULT_REGION="us-east-1" 
