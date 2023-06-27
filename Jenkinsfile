@@ -9,7 +9,7 @@ pipeline {
         }
         
         stage('Package') {
-            steps {
+            steps { 
                 sh 'mvn package'    
 		            echo "Maven Package Goal Executed Successfully!";
             }
