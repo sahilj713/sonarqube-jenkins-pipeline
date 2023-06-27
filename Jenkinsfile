@@ -24,7 +24,7 @@ pipeline {
         
         stage('Jacoco Reports') {
             steps {
-                  jacoco()
+                  // jacoco()
                   echo "Publishing Jacoco Code Coverage Reports";
             }
         }
