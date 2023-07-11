@@ -29,32 +29,7 @@ pipeline {
             }
         }
 
-	// stage('SonarQube analysis') {
-    //         steps {
-	// 	// Change this as per your Jenkins Configuration
-    //             withSonarQubeEnv('sonar-server') {
-    //                 sh 'mvn package sonar:sonar'
-    //             }
-    //         }
-    //     }
 
-	// stage("Quality gate") {
-    //         steps {
-    //             waitForQualityGate abortPipeline: true
-    //         }
-    //     }
-        
-    // }
-    // post {
-        
-    //     success {
-    //         echo 'This will run only if successful'
-    //     }
-    //     failure {
-    //         echo 'This will run only if failed'
-    //     }
-    
-    // }
 
 stage('Quality Gate Status Check'){
  steps{
